@@ -24,22 +24,28 @@
 import csv
 
 # open the vendorlist file
-
+infile = open("vendorlist.csv","r")
 
 # create a csv object from the file object
-
+reader = csv.DictReader(infile)
 
 # create an output file
-
-
-
-
+outfile = open("marketinglistFINAL.csv","w")
+writer = csv.writer(outfile)
 
 # create an empty dictionary
-
-
-
+dictionary = {'first_name' : []}
+dictionary2 = {'last_name' : [], 'email' : [],'phone' : []}
 # iterate through the csv object
+next(reader)
+
+for row in reader:
+    dictionary['first_name'].append(row['first_name'])
+    dictionary2['last_name'].append(row['last_name'])
+    dictionary2['email'].append(row['email'])
+    dictionary2['phone'].append(row['phone'])
+    
+    
 
 
 
@@ -49,12 +55,17 @@ import csv
 
 
 # print the dictionary after the loop is finished
-
+print(dictionary)
+print(dictionary2)
 
 
 # iternate through the dictionary and write to the output file
 
+writer.writerow('Name Email Phone')
+for x in dictionary.items():
+    writer.writerow(x)
 
 
 # close your output file
 
+outfile.close()
